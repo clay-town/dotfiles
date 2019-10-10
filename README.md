@@ -1,4 +1,4 @@
-## Starting Ritual ##
+## My collection of dotfiles ##
 
 
-Project start ritual for speed, power and profit
+For favorable configurations to my shell
