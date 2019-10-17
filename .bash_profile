@@ -1,27 +1,30 @@
-#   Much of this profile was stolen from natelandeu.com
-#
 #
 #   Change Prompt
 #   ------------------------------------------------------------
-    export PS1="________________________________________________________________________________\n| \w @ \h (\u) \n \n \n| => "
-    export PS2="| => "
-
+git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+acolor() {
+  [[ -n $(git status --porcelain=v2 2>/dev/null) ]] && echo 31 || echo 33
+}
+export PS1="\u@\[\033[32m\]\w\[\033[\$(acolor)m\]\$(git_branch)\[\033[00m\] 🤘 \n 🤖 🔥🔥🔥  "
+#export PS1="\u@\[\e[35m\]\w\[\e[m\]\[\033[\$(acolor)m\]\$(git_branch)\[\033[00m\]\ \n🤘 =>> "
 
 #   Set Paths
 #   ------------------------------------------------------------
-    export PATH="$PATH:/usr/local/bin/"
-    export PATH="/usr/local/git/bin:/sw/bin/:/usr/local/bin:/usr/local/:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
-    export PATH=$PATH:/Users/Orion/Documents/cs271/nand2tetris/tools/
-    export PATH=$PATH:/Applications/
-
+   
 #   -----------------------------
 #   2. MAKE TERMINAL BETTER
 #   -----------------------------
-
 alias ll='ls -FGlAhp'
 alias pcc='ssh clayton.mccune@syccuxas01.pcc.edu'
 alias gURL='https://api.github.com/user/repos'
-
+alias vp='vim ~/.bash_profile'
+alias sce='source ~/.bash_profile'
+alias please='sudo'
+alias cpwd="pwd | xclip && echo 'pwd copied to clipboard'"
+alias c='xclip'
+alias v='xclip -o'
 #this function is used to create a new git Repo (locally and at github)
 # $repName name of the repository (there is no default name)
 # $header: header for your readme file
@@ -43,7 +46,13 @@ nRepo () {
 	curl -u "clay-town" https://api.github.com/user/repos -d '{"name":"'$repName'"}'
 	git remote add origin git@github.com:clay-town/$repName.git
 	git commit -m'initial commit'
-	git push --set-upstream origin master
-Test here	
+	git push --set-upstream origin master	
+}
+
+#tRepo takes a respository you cloned and resets the upstream branch to one that you created in your own github
+tRepo () {
+	repName=${1}
+	curl -u "clay-town" https://api.github.com/user/repos -d '{"name":"'$repName'"}'
+	git remote set-url origin https://github.com/clay-town/$repName.git
 }
 
