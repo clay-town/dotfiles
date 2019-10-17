@@ -25,6 +25,7 @@ alias please='sudo'
 alias cpwd="pwd | xclip && echo 'pwd copied to clipboard'"
 alias c='xclip'
 alias v='xclip -o'
+alias bp='.bash_profile'
 #this function is used to create a new git Repo (locally and at github)
 # $repName name of the repository (there is no default name)
 # $header: header for your readme file
