@@ -12,11 +12,8 @@ export PS1="\u@\[\033[32m\]\w\[\033[\$(acolor)m\]\$(git_branch)\[\033[00m\] 🤘
 
 #   Set Paths
 #   ------------------------------------------------------------
-export PATH=$PATH:/usr/local/go/bin
-export GOPATH="$HOME/go_projects"
-export GOBIN="$GOPATH/bin"
-export PATH=$PATH:$GOBIN
-
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
 #   -----------------------------
 #   2. MAKE TERMINAL BETTER
 #   -----------------------------
@@ -38,6 +35,7 @@ alias ga='git add .'
 alias gr='git remote -v'
 alias hist='cat /dev/null>~/.bash_history'
 alias goodnight='logout'
+alias gob='go run cmd/tradewars/main.go cmd/tradewars/handlers.go'
 
 #this function is used to create a new git Repo (locally and at github)
 # $repName name of the repository (there is no default name)
@@ -73,3 +71,21 @@ bRepo () {
   git commit -m'initial commit'
   git push --set-upstream origin master
 }
+
+# https://www.digitalocean.com/community/tutorials/how-to-install-go-and-set-up-a-local-programming-environment-on-ubuntu-18-04
+# cd ~
+# curl -O https://dl.google.com/go/go1.12.1.linux-amd64.tar.gz
+# sha256sum go1.12.1.linux-amd64.tar.gz
+# sudo tar -xvf go1.12.1.linux-amd64.tar.gz -C /usr/local
+# sudo chown -R root:root /usr/local/go
+#
+# mkdir -p $HOME/go/{bin,src}
+#
+#
+# nano ~/.profile
+# export GOPATH=$HOME/go
+# export PATH=$PATH:$GOPATH/bin
+# export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
+# . ~/.profile
+# echo $PATH
+# go version
